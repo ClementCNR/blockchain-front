@@ -1,6 +1,10 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+// Import WagmiConfig et le client Wagmi
+import { WagmiConfig } from "wagmi";
+import { wagmiClient } from "@/lib/wagmi"; // Assurez-vous que le chemin est correct
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -18,10 +22,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+      <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      {WagmiConfig}
+      <WagmiConfig client={wagmiClient}>
+        {            children           }
+      </WagmiConfig>
       </body>
-    </html>
+      </html>
   );
 }
